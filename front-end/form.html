@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Inserir Questão - QuestENEM</title>
+</head>
+<body>
+    <h1>Inserir Nova Questão</h1>
+    <a href="banco.php"><h2>Cancelar</h2></a>
+
+    <form action="inserir_questao.php" method="POST" enctype="multipart/form-data">
+        <label for="num">Número da Questão:</label>
+        <input type="number" name="num" required><br>
+
+        <label for="disciplina">Disciplina:</label>
+        <select id="disciplina" name="disciplina">
+            <option value="Matemática">Matemática</option>
+            <option value="Ciências da Natureza">Ciências da Natureza</option>
+            <option value="Ciências Humanas">Ciências Humanas</option>
+            <option value="Linguagens">Linguagens</option>
+            <option value="Inglês">Inglês</option>
+            <option value="Espanhol">Espanhol</option>
+        </select><br>
+
+        <label for="texto">Texto da Questão:</label>
+        <textarea name="texto" rows="4" required></textarea><br>
+
+        <label for="img">URL da Imagem (opcional):</label>
+        <input type="file" name="img" id="img" accept="image/*"><br>
+
+        <label for="alt_a">Alternativa A:</label>
+        <input type="text" name="alt_a" required><br>
+
+        <label for="alt_b">Alternativa B:</label>
+        <input type="text" name="alt_b" required><br>
+
+        <label for="alt_c">Alternativa C:</label>
+        <input type="text" name="alt_c" required><br>
+
+        <label for="alt_d">Alternativa D:</label>
+        <input type="text" name="alt_d" required><br>
+
+        <label for="alt_e">Alternativa E:</label>
+        <input type="text" name="alt_e" required><br>
+
+        <label>Resposta Correta:</label><br>
+        <input type="radio" name="respCorreta" value="a" required> A
+        <input type="radio" name="respCorreta" value="b" required> B
+        <input type="radio" name="respCorreta" value="c" required> C
+        <input type="radio" name="respCorreta" value="d" required> D
+        <input type="radio" name="respCorreta" value="e" required> E<br>
+
+        <label for="dificuldade">Dificuldade:</label>
+        <select name="dificuldade" required>
+            <option value="Fácil">Fácil</option>
+            <option value="Intermediária">Intermediária</option>
+            <option value="Difícil">Difícil</option>
+        </select><br>
+
+        <label for="textoCorrecao">Texto de Correção:</label>
+        <textarea name="textoCorrecao" rows="4" required></textarea><br>
+
+        <label for="idEnem">Ano:</label>
+        <select id="idEnem" name="idEnem" required>
+            <option value="1">2022</option>
+            <option value="2">2021</option>
+            <option value="3">2020</option>
+            <option value="4">2019</option>
+            <option value="5">2018</option>
+            <option value="6">2017</option>
+            <option value="7">2016</option>
+            <option value="8">2015</option>
+            <option value="9">2014</option>
+            <option value="10">2013</option>
+            </select><br><br>
+
+        <input type="submit" value="Inserir Questão">
+    </form>
+</body>
+</html>
+
+

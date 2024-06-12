@@ -1,0 +1,177 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+
+    /*background-image: url("img/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+header {
+    background-color: #332d81b2;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.midfield{
+    margin: 20px;
+    padding: 10px;
+}
+
+.bg{
+    background-color: #ffffff8e;
+}
+
+.button{
+background-color: #8595b6;
+}
+/* Estilos da seção hero */
+.hero {
+    opacity: 1;
+    text-align: center;
+    padding: 10% 0;
+    margin: 20px;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #777;
+}
+
+.hero a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #322d81;
+    color: #fff;
+    text-decoration: none;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+/* Estilos da seção de recursos */
+.features {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.feature {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    margin: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.feature h3 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Estilos do texto dentro das divs */
+.feature p {
+    font-size: 16px; /* Tamanho da fonte */
+    color: #322d81; /* Cor do texto */
+    text-decoration: none; /* Remover decoração de texto (se houver) */
+    font-weight: normal; /* Espessura da fonte normal */
+}
+
+.feature h3 {
+    color: #333; /* Cor do texto */
+    text-decoration: bold; /* Remover decoração de texto (se houver) */
+    font-weight: normal; /* Espessura da fonte normal */
+}
+
+
+/* Estilos do rodapé */
+footer {
+    background-color: #322d81;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+/* Estilize os rótulos dos campos */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilize os campos de entrada de texto */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555; /* Cor da borda */
+    border-radius: 5px;
+    background-color: #222; /* Cor de fundo */
+    color: white; /* Cor do texto */
+}
+
+/* Estilize os botões */
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007BFF; /* Azul escuro (exemplo: #007BFF) */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Azul mais claro quando hover (exemplo: #0056b3) */
+}
+
+/* Outras regras de estilo a seguir... */
+
+/* Exibindo os resultados de uma questão */
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+.quem-somos{
+    text-align: left;
+}
+
+.quemsomosimg{
+    float: right;
+}
+
+
