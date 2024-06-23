@@ -11,14 +11,22 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async register(username: string, password: string): Promise<string> {
+  async createUser(username: string, password: string): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = this.usersRepository.create({ username, password: hashedPassword });
-    await this.usersRepository.save(user);
+    return this.usersRepository.save(user);
+  }
+
+  async register(username: string, password: string): Promise<string> {
+    await this.createUser(username, password);
     return 'User registered successfully!';
   }
 
   async findByUsername(username: string): Promise<User | undefined> {
     return this.usersRepository.findOne({ where: { username } });
+  }
+
+  async findById(id: number): Promise<User | undefined> {
+    return this.usersRepository.findOne({ where: { id } });
   }
 }

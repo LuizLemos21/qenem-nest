@@ -7,6 +7,7 @@ export class UsersController {
 
   @Post('register')
   async register(@Body() body: { username: string; password: string }): Promise<string> {
-    return this.usersService.register(body.username, body.password);
+    await this.usersService.createUser(body.username, body.password);
+    return 'User registered successfully!';
   }
 }

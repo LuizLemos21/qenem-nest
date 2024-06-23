@@ -1,18 +1,22 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { SimulationsService } from './simulations.service';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Simulation } from './simulation.entity';
 
-describe('SimulationsService', () => {
-  let service: SimulationsService;
+@Injectable()
+export class SimulationsService {
+  constructor(
+    @InjectRepository(Simulation)
+    private simulationsRepository: Repository<Simulation>,
+  ) {}
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [SimulationsService],
-    }).compile();
+  async createSimulation(userId: number): Promise<string> {
+    const simulation = this.simulationsRepository.create({ user: { id: userId }, simulationDate: new Date() });
+    await this.simulationsRepository.save(simulation);
+    return 'Simulation created successfully!';
+  }
 
-    service = module.get<SimulationsService>(SimulationsService);
-  });
-
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+  async getAllSimulations(): Promise<Simulation[]> {
+    return this.simulationsRepository.find({ relations: ['user'] });
+  }
+}

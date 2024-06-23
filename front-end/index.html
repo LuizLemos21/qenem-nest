@@ -16,40 +16,63 @@
                 <li><a href="simul.html">Criar Simulado</a></li>
                 <li><a href="feedback.html">Feedback Personalizado</a></li>
                 <li><a href="quemsomos.html">Quem Somos?</a></li>
-                <li><a href="logout.html">Sair</a></li>
-                
+                <li><a href="logout.html" id="logout">Sair</a></li>
             </ul>
         </nav>
     </header>
     <section class="bg">
-    <section class="hero">
-        <h2>Bem-vindo, <!-- <?php echo $_SESSION["username"]; ?>
-        <?php if($_SESSION["isAdmin"]){ echo("<small> ADM</small>"); } ?>
-        -->
-        </h2>
-        <h2>Preparando-se para o ENEM?</h2>
-        <p>Pratique com questões reais e melhore seus resultados!</p>
+        <section class="hero">
+            <h2>Bem-vindo, <span id="username"></span></h2>
+            <h2>Preparando-se para o ENEM?</h2>
+            <p>Pratique com questões reais e melhore seus resultados!</p>
+        </section>
+        <section class="features">
+            <div class="feature">
+                <h3>Banco de Questões</h3>
+                <p>Acesse uma vasta coleção de questões do ENEM em várias disciplinas.</p>
+                <a href="banco.html">Saiba Mais</a>
+            </div>
+            <div class="feature">
+                <h3>Crie Simulados</h3>
+                <p>Crie simulados personalizados com questões de sua escolha.</p>
+                <a href="simul.html">Saiba Mais</a>
+            </div>
+            <div class="feature">
+                <h3>Feedback Personalizado</h3>
+                <p>Receba correção instantânea e feedback detalhado após cada simulado.</p>
+                <a href="feedback.html">Saiba Mais</a>
+            </div>
+        </section>
     </section>
-    <section class="features">
-        <div class="feature">
-            <h3>Banco de Questões</h3>
-            <p>Acesse uma vasta coleção de questões do ENEM em várias disciplinas.</p>
-            <a href="banco.html">Saiba Mais</a>
-        </div>
-        <div class="feature">
-            <h3>Crie Simulados</h3>
-            <p>Crie simulados personalizados com questões de sua escolha.</p>
-            <a href="simul.html">Saiba Mais</a>
-        </div>
-        <div class="feature">
-            <h3>Feedback Personalizado</h3>
-            <p>Receba correção instantânea e feedback detalhado após cada simulado.</p>
-            <a href="feedback.html">Saiba Mais</a>
-        </div>
-    </section>
-</section>
     <footer>
         <p>&copy; 2023 QuestENEM. Todos os direitos reservados.</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+            } else {
+                fetch('/users/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('username').textContent = data.username;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    window.location.href = 'login.html';
+                });
+
+                document.getElementById('logout').addEventListener('click', function() {
+                    localStorage.removeItem('token');
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -2,17 +2,13 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Subject } from '../subjects/subject.entity';
 
 @Entity()
-export class Question {
-  [x: string]: any;
+export class Topic {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  questionText: string;
+  name: string;
 
-  @Column()
-  correctAnswer: string;
-
-  @ManyToOne(() => Subject, (subject) => subject.questions)
+  @ManyToOne(() => Subject, (subject) => subject.topics)
   subject: Subject;
 }

@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { User } from '../users/user.entity';
+import { Answer } from '../answers/answer.entity';
 
 @Entity()
 export class Simulation {
@@ -11,4 +12,7 @@ export class Simulation {
 
   @ManyToOne(() => User, (user) => user.simulations)
   user: User;
+
+  @OneToMany(() => Answer, (answer) => answer.simulation)
+  answers: Answer[];
 }
