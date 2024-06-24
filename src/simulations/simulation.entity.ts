@@ -10,9 +10,9 @@ export class Simulation {
   @Column()
   simulationDate: Date;
 
-  @ManyToOne(() => User, (user) => user.simulations)
+ /* @ManyToOne(() => User, (user) => user.simulations)
   user: User;
-
+*/
   @OneToMany(() => Answer, (answer) => answer.simulation)
   answers: Answer[];
 }

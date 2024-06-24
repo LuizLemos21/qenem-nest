@@ -2,18 +2,11 @@ import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { QuestionsModule } from './questions/questions.module';
-import { SimulationsModule } from './simulations/simulations.module';
 import { User } from './users/user.entity';
-import { Question } from './questions/question.entity';
-import { Simulation } from './simulations/simulation.entity';
-import { Answer } from './answers/answer.entity';
-import { Subject } from './subjects/subject.entity';
-import { Topic } from './topics/topic.entity';
-import { Feedback } from './feedback/feedback.entity';
-import { Admin } from './admins/admin.entity';
-import { Session } from './sessions/session.entity';
-import { Role } from './roles/role.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './auth/jwt.strategy';
+import { LoggingMiddleware } from './logging.middleware';
 
 @Module({
   imports: [
@@ -24,13 +17,23 @@ import { Role } from './roles/role.entity';
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_DATABASE || 'questenem',
-      entities: [User, Question, Simulation, Answer, Subject, Topic, Feedback, Admin, Session, Role],
+      entities: [User],
       synchronize: true,
     }),
     UsersModule,
     AuthModule,
-    QuestionsModule,
-    SimulationsModule,
+    PassportModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET, // Use environment variables for this in production
+      signOptions: { expiresIn: '60m' },
+    }),
   ],
+  providers: [JwtStrategy],
 })
-export class AppModule{};
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggingMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

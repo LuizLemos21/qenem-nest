@@ -12,6 +12,6 @@ export class Session {
   @Column()
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.sessions)
-  user: User;
+ /* @ManyToOne(() => User, (user) => user.sessions)
+  user: User;*/
 }

@@ -10,13 +10,13 @@ export class SimulationsService {
     private simulationsRepository: Repository<Simulation>,
   ) {}
 
-  async createSimulation(userId: number): Promise<string> {
+ /* async createSimulation(userId: number): Promise<string> {
     const simulation = this.simulationsRepository.create({ user: { id: userId }, simulationDate: new Date() });
     await this.simulationsRepository.save(simulation);
     return 'Simulation created successfully!';
   }
-
-  async getAllSimulations(): Promise<Simulation[]> {
+*/
+/*  async getAllSimulations(): Promise<Simulation[]> {
     return this.simulationsRepository.find({ relations: ['user'] });
-  }
+  }*/
 }

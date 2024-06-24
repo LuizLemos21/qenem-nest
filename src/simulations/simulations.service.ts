@@ -9,7 +9,7 @@ export class SimulationsService {
     @InjectRepository(Simulation)
     private simulationsRepository: Repository<Simulation>,
   ) {}
-
+/*
   async createSimulation(userId: number): Promise<string> {
     const simulation = this.simulationsRepository.create({ user: { id: userId }, simulationDate: new Date() });
     await this.simulationsRepository.save(simulation);
@@ -18,5 +18,5 @@ export class SimulationsService {
 
   async getAllSimulations(): Promise<Simulation[]> {
     return this.simulationsRepository.find({ relations: ['user'] });
-  }
+  } */
 }

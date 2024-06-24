@@ -9,6 +9,6 @@ export class Feedback {
   @Column()
   feedbackText: string;
 
-  @ManyToOne(() => User, (user) => user.feedbacks)
-  user: User;
+/*  @ManyToOne(() => User, (user) => user.feedbacks)
+  user: User;*/
 }
