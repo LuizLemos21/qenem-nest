@@ -1,39 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Question } from './question.entity';
+import { Test, TestingModule } from '@nestjs/testing';
+import { QuestionsService } from './questions.service';
 
-@Injectable()
-export class QuestionsService {
-  constructor(
-    @InjectRepository(Question)
-    private questionsRepository: Repository<Question>,
-  ) {}
+describe('QuestionsService', () => {
+  let service: QuestionsService;
 
-  async findAll(subject?: string, difficulty?: string, quantity?: number): Promise<Question[]> {
-    const query = this.questionsRepository.createQueryBuilder('question');
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [QuestionsService],
+    }).compile();
 
-    if (subject) {
-      query.andWhere('question.subject = :subject', { subject });
-    }
+    service = module.get<QuestionsService>(QuestionsService);
+  });
 
-    if (difficulty) {
-      query.andWhere('question.difficulty = :difficulty', { difficulty });
-    }
-
-    if (quantity) {
-      query.limit(quantity);
-    }
-
-    return query.getMany();
-  }
-
-  async findOne(id: number): Promise<Question> {
-    return this.questionsRepository.findOneBy({ id });
-  }
-
-  async createQuestion(title: string, content: string, correctAnswer: string, subject: string, difficulty: string): Promise<Question> {
-    const question = this.questionsRepository.create({ title, content, correctAnswer, subject, difficulty });
-    return this.questionsRepository.save(question);
-  }
-}
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});

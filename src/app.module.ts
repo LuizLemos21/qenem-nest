@@ -10,6 +10,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './auth/jwt.strategy';
 import { LoggingMiddleware } from './logging.middleware';
+import { User } from './users/user.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { LoggingMiddleware } from './logging.middleware';
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_DATABASE || 'questenem',
-      entities: [Enem, Subject, Question],
+      entities: [Enem, Subject, Question, User],
       synchronize: true, // Use this only in development
     }),
     UsersModule,

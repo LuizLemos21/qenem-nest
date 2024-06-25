@@ -8,11 +8,12 @@ export class QuestionsController {
 
   @Get()
   async findAll(
-    @Query('subject') subject?: string,
+    @Query('subjectId') subjectId?: number,
+    @Query('enemId') enemId?: number,
     @Query('difficulty') difficulty?: string,
     @Query('quantity') quantity?: number,
   ): Promise<Question[]> {
-    return this.questionsService.findAll(subject, difficulty, quantity);
+    return this.questionsService.findAll(subjectId, enemId, difficulty, quantity);
   }
 
   @Get(':id')
@@ -25,9 +26,10 @@ export class QuestionsController {
     @Body('title') title: string,
     @Body('content') content: string,
     @Body('correctAnswer') correctAnswer: string,
-    @Body('subject') subject: string,
+    @Body('subjectId') subjectId: number,
+    @Body('enemId') enemId: number,
     @Body('difficulty') difficulty: string,
   ): Promise<Question> {
-    return this.questionsService.createQuestion(title, content, correctAnswer, subject, difficulty);
+    return this.questionsService.createQuestion(title, content, correctAnswer, subjectId, enemId, difficulty);
   }
 }

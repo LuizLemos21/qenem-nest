@@ -10,11 +10,17 @@ export class QuestionsService {
     private questionsRepository: Repository<Question>,
   ) {}
 
-  async findAll(subject?: string, difficulty?: string, quantity?: number): Promise<Question[]> {
-    const query = this.questionsRepository.createQueryBuilder('question');
+  async findAll(subjectId?: number, enemId?: number, difficulty?: string, quantity?: number): Promise<Question[]> {
+    const query = this.questionsRepository.createQueryBuilder('question')
+      .leftJoinAndSelect('question.subject', 'subject')
+      .leftJoinAndSelect('question.enem', 'enem');
 
-    if (subject) {
-      query.andWhere('question.subject = :subject', { subject });
+    if (subjectId) {
+      query.andWhere('question.subject_id = :subjectId', { subjectId });
+    }
+
+    if (enemId) {
+      query.andWhere('question.enem_id = :enemId', { enemId });
     }
 
     if (difficulty) {
@@ -29,11 +35,11 @@ export class QuestionsService {
   }
 
   async findOne(id: number): Promise<Question> {
-    return this.questionsRepository.findOneBy({ id });
+    return this.questionsRepository.findOne({ where: { id }, relations: ['subject', 'enem'] });
   }
 
-  async createQuestion(title: string, content: string, correctAnswer: string, subject: string, difficulty: string): Promise<Question> {
-    const question = this.questionsRepository.create({ title, content, correctAnswer, subject, difficulty });
+  async createQuestion(title: string, content: string, correctAnswer: string, subjectId: number, enemId: number, difficulty: string): Promise<Question> {
+    const question = this.questionsRepository.create({ title, content, correctAnswer, subject: { id: subjectId }, enem: { id: enemId }, difficulty });
     return this.questionsRepository.save(question);
   }
 }

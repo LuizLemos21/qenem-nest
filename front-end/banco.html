@@ -8,12 +8,23 @@
 </head>
 <body>
     <header>
-        <h1>Banco de Questões</h1>
+        <h1>QuestENEM</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="banco.html">Banco de Questões</a></li>
+                <li><a href="simul.html">Criar Simulado</a></li>
+                <li><a href="feedback.html">Feedback Personalizado</a></li>
+                <li><a href="quemsomos.html">Quem Somos?</a></li>
+                <li><button id="logout">Sair</button></li>
+            </ul>
+        </nav>
     </header>
+    <h2>Banco de Questões</h2>
     <section>
         <form id="filterForm">
-            <label for="subject">Assunto:</label>
-            <select id="subject" name="subject">
+            <label for="subject_id">Assunto:</label>
+            <select id="subject_id" name="subject_id">
                 <option value="">Selecione</option>
                 <option value="1">Matemática</option>
                 <option value="2">Linguagens, Códigos e suas Tecnologias</option>
@@ -23,8 +34,8 @@
                 <option value="6">Espanhol</option>
             </select>
 
-            <label for="enem">Ano do Enem:</label>
-            <select id="enem" name="enem">
+            <label for="enem_id">Ano do Enem:</label>
+            <select id="enem_id" name="enem_id">
                 <option value="">Selecione</option>
                 <script>
                     for (let year = 1998; year <= 2024; year++) {
