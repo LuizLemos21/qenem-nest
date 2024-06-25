@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
       event.preventDefault();
       const username = loginForm.username.value;
       const password = loginForm.password.value;
+      localStorage.setItem('username', username);
       
       try {
         const response = await fetch('http://localhost:3001/auth/login', { // Ensure correct URL

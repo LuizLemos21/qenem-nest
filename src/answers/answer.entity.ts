@@ -13,6 +13,6 @@ export class Answer {
   @ManyToOne(() => Simulation, (simulation) => simulation.answers)
   simulation: Simulation;
 
-  @ManyToOne(() => Question, (question) => question.answers)
+  @ManyToOne(() => Question, (question) => question.correctAnswer)
   question: Question;
 }

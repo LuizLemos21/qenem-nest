@@ -10,13 +10,16 @@ export class QuestionsService {
     private questionsRepository: Repository<Question>,
   ) {}
 
-  async createQuestion(questionText: string, correctAnswer: string): Promise<string> {
-    const question = this.questionsRepository.create({ questionText, correctAnswer });
-    await this.questionsRepository.save(question);
-    return 'Question created successfully!';
+  async findAll(): Promise<Question[]> {
+    return this.questionsRepository.find();
   }
 
-  async getAllQuestions(): Promise<Question[]> {
-    return this.questionsRepository.find();
+  async findOne(id: number): Promise<Question> {
+    return this.questionsRepository.findOneBy({ id });
+  }
+
+  async createQuestion(title: string, content: string, correctAnswer: string): Promise<Question> {
+    const question = this.questionsRepository.create({ title, content, correctAnswer });
+    return this.questionsRepository.save(question);
   }
 }

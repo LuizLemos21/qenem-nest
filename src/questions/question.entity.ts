@@ -1,18 +1,19 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Subject } from '../subjects/subject.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Question {
-  [x: string]: any;
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  questionText: string;
+  title: string;
+
+  @Column('text')
+  content: string;
 
   @Column()
   correctAnswer: string;
 
-  @ManyToOne(() => Subject, (subject) => subject.questions)
-  subject: Subject;
+  @Column()
+  subject: string;
 }

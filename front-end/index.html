@@ -16,7 +16,7 @@
                 <li><a href="simul.html">Criar Simulado</a></li>
                 <li><a href="feedback.html">Feedback Personalizado</a></li>
                 <li><a href="quemsomos.html">Quem Somos?</a></li>
-                <li><a href="logout.html" id="logout">Sair</a></li>
+                <li><button id="logout">Sair</button></li>
             </ul>
         </nav>
     </header>
@@ -48,6 +48,19 @@
         <p>&copy; 2023 QuestENEM. Todos os direitos reservados.</p>
     </footer>
     <script>
+                // Obtém o valor do item "username" do localStorage
+        const username = localStorage.getItem("username");
+
+        // Verifica se o item existe
+        if (username) {
+            // Se existir, substitui o elemento com o id "username" pelo valor do item
+            document.getElementById("username").innerHTML = username;
+        } else {
+            // Se não existir, exibe uma mensagem de erro
+            document.getElementById("username").innerHTML = "Erro: Item 'username' não encontrado no localStorage";
+        };
+
+
         document.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -69,6 +82,7 @@
 
                 document.getElementById('logout').addEventListener('click', function() {
                     localStorage.removeItem('token');
+                    localStorage.removeItem('username');
                     window.location.href = 'login.html';
                 });
             }
