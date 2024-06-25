@@ -2,9 +2,10 @@ import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { User } from './users/user.entity';
-import { Question } from './questions/question.entity';
 import { QuestionsModule } from './questions/questions.module';
+import { Enem } from './enem/enem.entity';
+import { Subject } from './subjects/subject.entity';
+import { Question } from './questions/question.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './auth/jwt.strategy';
@@ -19,15 +20,15 @@ import { LoggingMiddleware } from './logging.middleware';
       username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_DATABASE || 'questenem',
-      entities: [User, Question],
-      synchronize: true,
+      entities: [Enem, Subject, Question],
+      synchronize: true, // Use this only in development
     }),
     UsersModule,
     AuthModule,
     QuestionsModule,
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET,  
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '60m' },
     }),
   ],

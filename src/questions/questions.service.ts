@@ -10,16 +10,30 @@ export class QuestionsService {
     private questionsRepository: Repository<Question>,
   ) {}
 
-  async findAll(): Promise<Question[]> {
-    return this.questionsRepository.find();
+  async findAll(subject?: string, difficulty?: string, quantity?: number): Promise<Question[]> {
+    const query = this.questionsRepository.createQueryBuilder('question');
+
+    if (subject) {
+      query.andWhere('question.subject = :subject', { subject });
+    }
+
+    if (difficulty) {
+      query.andWhere('question.difficulty = :difficulty', { difficulty });
+    }
+
+    if (quantity) {
+      query.limit(quantity);
+    }
+
+    return query.getMany();
   }
 
   async findOne(id: number): Promise<Question> {
     return this.questionsRepository.findOneBy({ id });
   }
 
-  async createQuestion(title: string, content: string, correctAnswer: string): Promise<Question> {
-    const question = this.questionsRepository.create({ title, content, correctAnswer });
+  async createQuestion(title: string, content: string, correctAnswer: string, subject: string, difficulty: string): Promise<Question> {
+    const question = this.questionsRepository.create({ title, content, correctAnswer, subject, difficulty });
     return this.questionsRepository.save(question);
   }
 }
