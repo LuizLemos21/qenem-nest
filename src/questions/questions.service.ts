@@ -35,11 +35,21 @@ export class QuestionsService {
   }
 
   async findOne(id: number): Promise<Question> {
-    return this.questionsRepository.findOne({ where: { id }, relations: ['subject', 'enem'] });
+    return this.questionsRepository.findOne({
+      where: { id },
+      relations: ['subject', 'enem']
+    });
   }
 
-  async createQuestion(title: string, content: string, correctAnswer: string, subjectId: number, enemId: number, difficulty: string): Promise<Question> {
-    const question = this.questionsRepository.create({ title, content, correctAnswer, subject: { id: subjectId }, enem: { id: enemId }, difficulty });
+  async createQuestion(
+    title: string, content: string, correctAnswer: string, subjectId: number, enemId: number,
+    difficulty: string, alternativaA: string, alternativaB: string, alternativaC: string,
+    alternativaD: string, alternativaE: string, explanation: string,
+  ): Promise<Question> {
+    const question = this.questionsRepository.create({
+      title, content, correctAnswer, subject: { id: subjectId }, enem: { id: enemId },
+      difficulty, alternativaA, alternativaB, alternativaC, alternativaD, alternativaE, explanation,
+    });
     return this.questionsRepository.save(question);
   }
 }

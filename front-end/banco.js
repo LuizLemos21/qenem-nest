@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let query = '?';
         if (subjectId) query += `subject_id=${subjectId}&`;
-        if (enemId) query += `enem_id=${enemId}&`;
+        if (enemId) query += `enem_id=${enemId-1997}&`;
         if (difficulty) query += `difficulty=${difficulty}&`;
         if (quantity) query += `quantity=${quantity}&`;
 

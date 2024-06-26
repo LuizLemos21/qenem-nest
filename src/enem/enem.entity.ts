@@ -8,7 +8,6 @@ export class Enem {
   @Column()
   year: number;
 
-  
   @Column()
   test: string;
 }

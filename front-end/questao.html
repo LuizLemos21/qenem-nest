@@ -13,11 +13,24 @@
     <section>
         <div id="questionContent"></div>
         <form id="answerForm">
-            <label for="answer">Sua Resposta:</label>
-            <input type="text" id="answer" name="answer" required>
+            <label>
+                <input type="radio" name="answer" value="A" required> A
+            </label>
+            <label>
+                <input type="radio" name="answer" value="B" required> B
+            </label>
+            <label>
+                <input type="radio" name="answer" value="C" required> C
+            </label>
+            <label>
+                <input type="radio" name="answer" value="D" required> D
+            </label>
+            <label>
+                <input type="radio" name="answer" value="E" required> E
+            </label>
             <button type="submit">Enviar Resposta</button>
         </form>
-        <p id="errorMessage" style="color: red;"></p>
+        <p id="feedbackMessage"></p>
     </section>
     <script src="questao.js"></script>
 </body>

@@ -46,5 +46,5 @@ export class Question {
   alternativaE: string;
 
   @Column({ nullable: true })
-  explanation: string; // textoResposta
+  explanation: string;
 }

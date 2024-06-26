@@ -8,8 +8,8 @@ export class QuestionsController {
 
   @Get()
   async findAll(
-    @Query('subjectId') subjectId?: number,
-    @Query('enemId') enemId?: number,
+    @Query('subject_id') subjectId?: number,
+    @Query('enem_id') enemId?: number,
     @Query('difficulty') difficulty?: string,
     @Query('quantity') quantity?: number,
   ): Promise<Question[]> {
@@ -29,7 +29,13 @@ export class QuestionsController {
     @Body('subjectId') subjectId: number,
     @Body('enemId') enemId: number,
     @Body('difficulty') difficulty: string,
+    @Body('alternativaA') alternativaA: string,
+    @Body('alternativaB') alternativaB: string,
+    @Body('alternativaC') alternativaC: string,
+    @Body('alternativaD') alternativaD: string,
+    @Body('alternativaE') alternativaE: string,
+    @Body('explanation') explanation: string,
   ): Promise<Question> {
-    return this.questionsService.createQuestion(title, content, correctAnswer, subjectId, enemId, difficulty);
+    return this.questionsService.createQuestion(title, content, correctAnswer, subjectId, enemId, difficulty, alternativaA, alternativaB, alternativaC, alternativaD, alternativaE, explanation);
   }
 }
