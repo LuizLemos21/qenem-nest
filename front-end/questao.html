@@ -1,37 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questão</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Detalhes da Questão</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Questão</h1>
-    </header>
-    <section>
-        <div id="questionContent"></div>
-        <form id="answerForm">
-            <label>
-                <input type="radio" name="answer" value="A" required> A
-            </label>
-            <label>
-                <input type="radio" name="answer" value="B" required> B
-            </label>
-            <label>
-                <input type="radio" name="answer" value="C" required> C
-            </label>
-            <label>
-                <input type="radio" name="answer" value="D" required> D
-            </label>
-            <label>
-                <input type="radio" name="answer" value="E" required> E
-            </label>
-            <button type="submit">Enviar Resposta</button>
-        </form>
-        <p id="feedbackMessage"></p>
-    </section>
-    <script src="questao.js"></script>
+  <h1>Detalhes da Questão</h1>
+  <div id="questionDetails"></div>
+  <p id="errorMessage" style="color: red;"></p>
+  <script src="questao.js"></script>
 </body>
 </html>

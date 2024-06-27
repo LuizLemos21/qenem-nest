@@ -1,44 +1,33 @@
-import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { QuestionsModule } from './questions/questions.module';
-import { Enem } from './enem/enem.entity';
-import { Subject } from './subjects/subject.entity';
-import { Question } from './questions/question.entity';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { JwtStrategy } from './auth/jwt.strategy';
-import { LoggingMiddleware } from './logging.middleware';
-import { User } from './users/user.entity';
+import { ConfigModule } from '@nestjs/config';
+
+import { UserModule } from './modules/user.module'
+import { AuthModule } from './modules/auth.module';
+import { QuestionModule } from './modules/question.module';
+import { EnemModule } from './modules/enem.module';
+import { SubjectModule } from './modules/subject.module';
+import { SimulationModule } from './modules/simulation.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST || 'localhost',
-      port: Number(process.env.DB_PORT) || 3306,
-      username: process.env.DB_USERNAME || 'root',
-      password: process.env.DB_PASSWORD || '',
-      database: process.env.DB_DATABASE || 'questenem',
-      entities: [Enem, Subject, Question, User],
-      synchronize: true, // Use this only in development
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      autoLoadEntities: true,
+      synchronize: true, // Note: This should be disabled in production
     }),
-    UsersModule,
+    UserModule,
     AuthModule,
-    QuestionsModule,
-    PassportModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '60m' },
-    }),
+    QuestionModule,
+    EnemModule,
+    SubjectModule,
+    SimulationModule,
   ],
-  providers: [JwtStrategy],
 })
-export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggingMiddleware)
-      .forRoutes({ path: '*', method: RequestMethod.ALL });
-  }
-}
+export class AppModule {}

@@ -23,8 +23,11 @@
     <h2>Banco de Questões</h2>
     <section>
         <form id="filterForm">
-            <label for="subject_id">Assunto:</label>
+            <label for="subject_id">Disciplina:</label>
             <select id="subject_id" name="subject_id">
+                <!-- Subject options will be populated dynamically -->
+
+                <!--
                 <option value="">Selecione</option>
                 <option value="1">Matemática</option>
                 <option value="2">Linguagens, Códigos e suas Tecnologias</option>
@@ -32,16 +35,21 @@
                 <option value="4">Ciências Humanas</option>
                 <option value="5">Inglês</option>
                 <option value="6">Espanhol</option>
+                -->
             </select>
 
             <label for="enem_id">Ano do Enem:</label>
             <select id="enem_id" name="enem_id">
+                <!-- Subject options will be populated dynamically -->
+
+                <!--
                 <option value="">Selecione</option>
                 <script>
                     for (let year = 1998; year <= 2024; year++) {
                         document.write(`<option value="${year}">${year}</option>`);
                     }
                 </script>
+                -->
             </select>
             
             <label for="difficulty">Dificuldade:</label>

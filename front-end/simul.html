@@ -33,32 +33,24 @@ if (!isset($_SESSION['username'])){
         </nav>
     </header>
     <section class="midfield" >
-        <h2>Criar Simulado</h2>
-        <form action="gera_simulado.php" method="POST">
-            <fieldset>
-                <legend>Disciplinas:</legend>
-                <input type="checkbox" id="matematica" name="disciplina" value="matematica">Matemática
-                <input type="checkbox" id="ciencias-natureza" name="disciplina" value="ciencias-natureza">Ciencias da Natureza
-                <input type="checkbox" id="Ciencias Humanas" name="disciplina" value="ciências humanas">Ciencias Humanas
-                <input type="checkbox" id="linguagens" name="disciplina" value="linguagens">Linguagens
-                <input type="checkbox" id="ingles" name="disciplina" value="ingles">Ingles
-                <input type="checkbox" id="espanhol" name="disciplina" value="espanhol">Espanhol
-            </fieldset><br>
-
-            Quantidade de Questões (máx. 90):<input type="number" id="questoes" name="questoes" min="1" max="90" required>
-
-            Nível de Dificuldade:
-            <select id="dificuldade" name="dificuldade" required>
-                <option value="fácil">Fácil</option>
-                <option value="intermediária">Intermediária</option>
-                <option value="avançada">Avançada</option>
-            </select><br><br>
-
-            <input type="submit" value="Criar Simulado">
-        </form>
-    </section>
-    <footer>
-        <p>&copy; 2023 QuestENEM. Todos os direitos reservados.</p>
-    </footer>
+        <h1>Simulado</h1>
+  <form id="simulationForm">
+    <label for="subject_id">Disciplina:</label>
+    <select id="subject_id" name="subject_id">
+      <!-- Subject options will be populated dynamically -->
+    </select>
+    <label for="difficulty">Dificuldade:</label>
+    <select id="difficulty" name="difficulty">
+      <option value="easy">Fácil</option>
+      <option value="medium">Média</option>
+      <option value="hard">Difícil</option>
+    </select>
+    <label for="quantity">Quantidade de Questões:</label>
+    <input type="number" id="quantity" name="quantity" min="1" max="100">
+    <button type="submit">Iniciar Simulado</button>
+  </form>
+  <div id="simulationDetails"></div>
+  <p id="errorMessage" style="color: red;"></p>
+  <script src="simulado.js"></script>
 </body>
 </html>
