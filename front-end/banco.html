@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banco de Questões</title>
     <link rel="stylesheet" href="style.css">
+    <title>Banco de Questões - QuestENEM</title>
 </head>
 <body>
     <header>
@@ -12,62 +12,41 @@
         <nav>
             <ul>
                 <li><a href="index.html">Início</a></li>
-                <li><a href="banco.html">Banco de Questões</a></li>
-                <li><a href="simul.html">Criar Simulado</a></li>
-                <li><a href="feedback.html">Feedback Personalizado</a></li>
-                <li><a href="quemsomos.html">Quem Somos?</a></li>
-                <li><button id="logout">Sair</button></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Registrar</a></li>
             </ul>
         </nav>
     </header>
-    <h2>Banco de Questões</h2>
     <section>
+        <h2>Banco de Questões</h2>
         <form id="filterForm">
-            <label for="subject_id">Disciplina:</label>
-            <select id="subject_id" name="subject_id">
-                <!-- Subject options will be populated dynamically -->
-
-                <!--
-                <option value="">Selecione</option>
-                <option value="1">Matemática</option>
-                <option value="2">Linguagens, Códigos e suas Tecnologias</option>
-                <option value="3">Ciências da Natureza</option>
-                <option value="4">Ciências Humanas</option>
-                <option value="5">Inglês</option>
-                <option value="6">Espanhol</option>
-                -->
+            <label for="enemYear">Ano do ENEM:</label>
+            <select id="enemYear" name="enemYear">
+                <!-- Options will be populated by JavaScript -->
             </select>
 
-            <label for="enem_id">Ano do Enem:</label>
-            <select id="enem_id" name="enem_id">
-                <!-- Subject options will be populated dynamically -->
-
-                <!--
-                <option value="">Selecione</option>
-                <script>
-                    for (let year = 1998; year <= 2024; year++) {
-                        document.write(`<option value="${year}">${year}</option>`);
-                    }
-                </script>
-                -->
+            <label for="subject">Disciplina:</label>
+            <select id="subject" name="subject">
+                <option value="Matemática">Matemática</option>
+                <option value="Linguagens, Códigos e suas Tecnologias">Linguagens, Códigos e suas Tecnologias</option>
+                <option value="Ciências da Natureza">Ciências da Natureza</option>
+                <option value="Ciências Humanas">Ciências Humanas</option>
+                <option value="Inglês">Inglês</option>
+                <option value="Espanhol">Espanhol</option>
             </select>
-            
+
             <label for="difficulty">Dificuldade:</label>
             <select id="difficulty" name="difficulty">
-                <option value="">Selecione</option>
-                <option value="easy">Fácil</option>
-                <option value="medium">Média</option>
-                <option value="hard">Difícil</option>
+                <option value="Fácil">Fácil</option>
+                <option value="Médio">Médio</option>
+                <option value="Difícil">Difícil</option>
             </select>
-            
-            <label for="quantity">Quantidade de Questões:</label>
-            <input type="number" id="quantity" name="quantity">
-            
+
             <button type="submit">Filtrar</button>
         </form>
-
-        <ul id="questionList"></ul>
-        <p id="errorMessage" style="color: red;"></p>
+        <div id="questionsList">
+            <!-- Questions will be displayed here -->
+        </div>
     </section>
     <script src="banco.js"></script>
 </body>
