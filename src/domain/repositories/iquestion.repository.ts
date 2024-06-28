@@ -2,6 +2,6 @@ import { Question } from '../entities/question.entity';
 
 export interface IQuestionRepository {
   findAll(subjectId?: number, enemId?: number, difficulty?: string, quantity?: number): Promise<Question[]>;
-  findOne(id: number): Promise<Question | undefined>;
+  findQuestionById(id: number): Promise<Question | undefined>;
   save(question: Question): Promise<Question>;
 }

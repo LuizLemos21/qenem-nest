@@ -13,11 +13,11 @@ export class EnemController {
 
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<Enem> {
-    return this.enemService.findOne(id);
+    return this.enemService.findOneById(id);
   }
 
   @Post()
   async createEnem(@Body() enem: Enem): Promise<Enem> {
-    return this.enemService.createEnem(enem);
+    return this.enemService.create(enem);
   }
 }

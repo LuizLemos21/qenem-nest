@@ -5,12 +5,14 @@ import { CreateUserDto } from '../dtos/create-user.dto';
 import { User } from '../../domain/entities/user.entity';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
+import { UserRepository } from '../../infrastructure/repositories/user.repository';
+
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectQueue('user') private readonly userQueue: Queue,
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(UserRepository) private readonly userRepository: UserRepository,
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
@@ -27,6 +29,8 @@ export class UserService {
       throw new BadRequestException('User could not be created');
     }
 
+    await this.userQueue.add('createUser', { userId: savedUser.id });
+
     return savedUser;
   }
 
@@ -39,7 +43,7 @@ export class UserService {
   }
 
   async findOneById(id: number): Promise<User> {
-    const user = await this.userRepository.findOne({ where: {id}});
+    const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }

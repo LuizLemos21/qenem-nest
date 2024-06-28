@@ -1,18 +1,27 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { SubjectService } from '../../application/services/subject.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { SubjectRepository } from '../../infrastructure/repositories/subject.repository';
+import { Subject } from '../../domain/entities/subject.entity';
 
-@Controller('subjects')
-export class SubjectController {
-  constructor(private readonly subjectService: SubjectService) {}
+@Injectable()
+export class SubjectService {
+  constructor(
+    @InjectRepository(SubjectRepository) private readonly subjectRepository: SubjectRepository,
+  ) {}
 
-  @Get()
-  findAll() {
-    return this.subjectService.findAll();
+  async findAll(): Promise<Subject[]> {
+    return this.subjectRepository.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.subjectService.findOne(id);
+  async findOneById(id: number): Promise<Subject> {
+    const subject = await this.subjectRepository.findSubjectById(id);
+    if (!subject) {
+      throw new NotFoundException(`Subject with ID ${id} not found`);
+    }
+    return subject;
+  }
+
+  async create(subject: Subject): Promise<Subject> {
+    return this.subjectRepository.saveSubject(subject);
   }
 }
-

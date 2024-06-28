@@ -1,17 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { ISimulationRepository } from '../../domain/repositories/isimulation.repository';
+import { SimulationRepository } from '../../infrastructure/repositories/simulation.repository';
 import { Simulation } from '../../domain/entities/simulation.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+
 
 @Injectable()
 export class SimulationService {
-  constructor(private readonly simulationRepository: ISimulationRepository) {}
+  constructor(
+    @InjectRepository(SimulationRepository)
+    private readonly simulationRepository: SimulationRepository,
+    ) {}
 
   async findAll(): Promise<Simulation[]> {
     return this.simulationRepository.findAll();
   }
 
   async findOne(id: number): Promise<Simulation> {
-    return this.simulationRepository.findOne(id);
+    return this.simulationRepository.findSimulationById(id);
   }
 
   async findByUserId(userId: number): Promise<Simulation[]> {
