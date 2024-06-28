@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IUserRepository } from '../../domain/repositories/iuser.repository';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { User } from '../../domain/entities/user.entity';
 import { InjectQueue } from '@nestjs/bull';
@@ -10,18 +10,17 @@ import { Queue } from 'bull';
 export class UserService {
   constructor(
     @InjectQueue('user') private readonly userQueue: Queue,
-    @InjectRepository(IUserRepository) private readonly userRepository: IUserRepository,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
-    const user = new User(
-      null,
-      createUserDto.username,
-      createUserDto.password,
-      createUserDto.email,
-      new Date(),
-      new Date(),
-    );
+    const user = this.userRepository.create({
+      username: createUserDto.username,
+      password: createUserDto.password,
+      email: createUserDto.email,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
     const savedUser = await this.userRepository.save(user);
     if (!savedUser) {
@@ -40,7 +39,7 @@ export class UserService {
   }
 
   async findOneById(id: number): Promise<User> {
-    const user = await this.userRepository.findOne(id);
+    const user = await this.userRepository.findOne({ where: {id}});
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }

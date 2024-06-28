@@ -5,13 +5,13 @@ import { Subject } from '../../domain/entities/subject.entity';
 
 @EntityRepository(SubjectOrmEntity)
 export class SubjectRepository extends Repository<SubjectOrmEntity> implements ISubjectRepository {
-  async findAllSubjects(): Promise<Subject[]> {
+  async findAll(): Promise<Subject[]> {
     const ormSubjects = await this.find();
     return ormSubjects.map(ormSubject => this.toDomain(ormSubject));
   }
 
-  async findOneSubject(id: number): Promise<Subject | undefined> {
-    const ormSubject = await this.findOne(id);
+  async findSubjectById(id: number): Promise<Subject | undefined> {
+    const ormSubject = await this.findOne({ where: { id } });
     return ormSubject ? this.toDomain(ormSubject) : undefined;
   }
 

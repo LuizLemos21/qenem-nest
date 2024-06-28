@@ -5,13 +5,13 @@ import { Enem } from '../../domain/entities/enem.entity';
 
 @EntityRepository(EnemOrmEntity)
 export class EnemRepository extends Repository<EnemOrmEntity> implements IEnemRepository {
-  async findAllEnems(): Promise<Enem[]> {
+  async findAll(): Promise<Enem[]> {
     const ormEnems = await this.find();
     return ormEnems.map(ormEnem => this.toDomain(ormEnem));
   }
 
-  async findOneEnem(id: number): Promise<Enem | undefined> {
-    const ormEnem = await this.findOne(id);
+  async findEnemById(id: number): Promise<Enem | undefined> {
+    const ormEnem = await this.findOne({ where: { id } });
     return ormEnem ? this.toDomain(ormEnem) : undefined;
   }
 

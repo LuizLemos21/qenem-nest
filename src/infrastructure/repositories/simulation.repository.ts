@@ -5,13 +5,13 @@ import { Simulation } from '../../domain/entities/simulation.entity';
 
 @EntityRepository(SimulationOrmEntity)
 export class SimulationRepository extends Repository<SimulationOrmEntity> implements ISimulationRepository {
-  async findAllSimulations(): Promise<Simulation[]> {
+  async findAll(): Promise<Simulation[]> {
     const ormSimulations = await this.find();
     return ormSimulations.map(ormSimulation => this.toDomain(ormSimulation));
   }
 
-  async findOneSimulation(id: number): Promise<Simulation | undefined> {
-    const ormSimulation = await this.findOne(id);
+  async findSimulationById(id: number): Promise<Simulation | undefined> {
+    const ormSimulation = await this.findOne({ where: { id } });
     return ormSimulation ? this.toDomain(ormSimulation) : undefined;
   }
 

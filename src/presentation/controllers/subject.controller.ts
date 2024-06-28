@@ -1,23 +1,18 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
-import { EnemService } from '../../application/services/enem.service';
-import { Enem } from '../../domain/entities/enem.entity';
+import { Controller, Get, Param } from '@nestjs/common';
+import { SubjectService } from '../../application/services/subject.service';
 
-@Controller('enems')
-export class EnemController {
-  constructor(private readonly enemService: EnemService) {}
+@Controller('subjects')
+export class SubjectController {
+  constructor(private readonly subjectService: SubjectService) {}
 
   @Get()
-  async findAll(): Promise<Enem[]> {
-    return this.enemService.findAll();
+  findAll() {
+    return this.subjectService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Enem> {
-    return this.enemService.findOne(id);
-  }
-
-  @Post()
-  async createEnem(@Body() enem: Enem): Promise<Enem> {
-    return this.enemService.createEnem(enem);
+  findOne(@Param('id') id: number) {
+    return this.subjectService.findOne(id);
   }
 }
+

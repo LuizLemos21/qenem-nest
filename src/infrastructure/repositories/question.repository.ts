@@ -5,7 +5,7 @@ import { Question } from '../../domain/entities/question.entity';
 
 @EntityRepository(QuestionOrmEntity)
 export class QuestionRepository extends Repository<QuestionOrmEntity> implements IQuestionRepository {
-  async findAllQuestions(subjectId?: number, enemId?: number, difficulty?: string, quantity?: number): Promise<Question[]> {
+  async findAll(subjectId?: number, enemId?: number, difficulty?: string, quantity?: number): Promise<Question[]> {
     const query = this.createQueryBuilder('question')
       .leftJoinAndSelect('question.subject', 'subject')
       .leftJoinAndSelect('question.enem', 'enem');
@@ -30,7 +30,7 @@ export class QuestionRepository extends Repository<QuestionOrmEntity> implements
     return ormQuestions.map(ormQuestion => this.toDomain(ormQuestion));
   }
 
-  async findOneQuestion(id: number): Promise<Question | undefined> {
+  async findQuestionById(id: number): Promise<Question | undefined> {
     const ormQuestion = await this.findOne({ where: { id }, relations: ['subject', 'enem'] });
     return ormQuestion ? this.toDomain(ormQuestion) : undefined;
   }

@@ -16,7 +16,7 @@ export class UserRepository extends Repository<UserOrmEntity> implements IUserRe
   }
 
   async findOneById(id: number): Promise<User | undefined> {
-    const ormUser = await this.findOne(id);
+    const ormUser = await this.findOne({ where: { id } });
     if (!ormUser) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
